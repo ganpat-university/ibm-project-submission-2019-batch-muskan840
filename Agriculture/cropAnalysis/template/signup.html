@@ -1,0 +1,144 @@
+<html xmlns="http://www.w3.org/1999/html">
+{% load static %}
+<head>
+    <title>Agriculture</title>
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.3/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+    <style>
+      /* Remove the navbar's default margin-bottom and rounded borders */ 
+      .navbar {
+        margin-bottom: 0;
+        border-radius: 0;
+      }
+      
+      /* Add a gray background color and some padding to the footer */
+      footer {
+        background-color: #f2f2f2;
+        padding: 25px;
+      }
+    </style>
+</head><style>
+    .card{
+        opacity: 0.7;
+
+     
+    }
+</style>
+<body >
+    <nav class="navbar navbar-inverse">
+        <div class="container-fluid">
+          <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>                        
+            </button>
+            <!-- <a class="navbar-brand" href="#">Portfolio</a> -->
+          </div>
+          <div class="collapse navbar-collapse" id="myNavbar">
+            <ul class="nav navbar-nav">
+              <li class="active"><a href="#">Home</a></li>
+              <!-- <li><a href="/dashboard/">Crop analysis</a></li> -->
+              <!-- <li><a href="#">Gallery</a></li>
+              <li><a href="#">Contact</a></li> -->
+            </ul>
+            <ul class="nav navbar-nav navbar-right">
+              <li><a href="/login/"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
+            </ul>
+          </div>
+        </div>
+      </nav>
+    <!-- style="background-image: url('{% static "/bg.jpg" %}')"; -->
+    <div id="container">
+
+
+
+
+<div class="card">
+    <img src="{% static '/bg_image.jpg' %}" alt="Lago di Braies">
+    <div class="card_details">
+<form action="/signup/" method="post" id="signupForm">
+    {% csrf_token %}
+    <div class="icon-rtl">
+    <input type="text"  id="input-field" placeholder="Username" required  name="uname"></div>
+    <div class="icon-email">
+    <input type="email"  id="input-field" placeholder="email" name="email"></div>
+    <div class="icon-pass">
+    <input type="password"  id="input-field" placeholder="password" name="password" required><br></div>
+    <div class="icon-pass">
+    <input type="password"   id="input-field" placeholder="confirm password" name="c_password" required><br></div>
+    {% for message in messages %}
+    {{message}}
+    {% endfor %}
+    <button type="submit" class="btn"  >signup </button>
+        
+</form>
+<button  class="btn"><a style="color: white;" href="/login/">login</a></button>
+ </div></div>
+
+</div>
+
+<script>
+  $(document).ready(function() {
+      $('#signupForm').submit(function(e) {
+        console.log('inform');
+          e.preventDefault();
+
+          var confirmPassField = $(this).find('input[name="c_password"]');
+          var newPassField = $(this).find('input[name="password"]');
+          var confirmPass = confirmPassField.val();
+          var newPass = newPassField.val();
+          
+          var nameField = $(this).find('input[name="uname"]');
+          var name = nameField.val();
+          if(name.length < 3){
+              nameField.addClass('is-invalid');
+              alert('Username should be atleast 3 characters long');
+          }
+
+          var emailRegex = /^\S+@\S+\.\S+$/;
+
+          var emailField = $(this).find('input[name="email"]');
+          if (!emailRegex.test(emailField.val())) {
+              emailField.addClass('is-invalid');
+              alert('Invalid Email Address');
+          }
+
+          if (confirmPass !== newPass) {
+              newPassField.addClass('is-invalid');
+              confirmPassField.addClass('is-invalid');
+              alert('Passwords Does Not match');
+          } else {
+
+              if (newPass.length < 8) {
+                  newPassField.addClass('is-invalid');
+                  alert('Password should be atleast 8 characters long');
+              } else {
+                  var passwordRegex = /^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{8,}$/;
+
+                  if (!passwordRegex.test(newPass)) {
+                      newPassField.addClass('is-invalid');
+                      alert('Password should have at least one Letter, one Number One Special Character');
+                  }
+              }
+
+          }
+
+          // If all required fields are valid, submit the form
+          if ($(this).find('.is-invalid').length == 0) {
+              $(this).unbind('submit').submit();
+          }
+      });
+
+      $("select, input").change(function() {
+          $(this).removeClass("is-invalid");
+      });
+  });
+</script>
+
+</body>
+</html>

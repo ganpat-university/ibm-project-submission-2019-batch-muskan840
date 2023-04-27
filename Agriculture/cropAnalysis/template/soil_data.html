@@ -1,0 +1,98 @@
+<html xmlns="http://www.w3.org/1999/html">
+{% load static %}
+
+<head>
+    <title>Agriculture</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.3/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+
+    
+</head>
+<style>
+    .card{
+        opacity: 0.7;
+     
+    }
+    /* .btn{
+        background-color: black;
+    } */
+</style>
+<style>
+    /* Remove the navbar's default margin-bottom and rounded borders */ 
+    .navbar {
+      margin-bottom: 0;
+      border-radius: 0;
+    }
+    
+    /* Add a gray background color and some padding to the footer */
+    footer {
+      background-color: #f2f2f2;
+      padding: 25px;
+    }
+  </style>
+</head>
+<body style="background-image: url('{% static "/bg_image_data.jpg" %}')";>
+    <!-- style="background-image: url('{% static "/bg_image_data.jpg" %}')"; -->
+    <!-- style="background-color: gray;" -->
+
+<nav class="navbar navbar-inverse">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>                        
+      </button>
+      <!-- <a class="navbar-brand" href="#">Portfolio</a> -->
+    </div>
+    <div class="collapse navbar-collapse" id="myNavbar">
+      <ul class="nav navbar-nav">
+        <li ><a href="/ds/">Home</a></li>
+        <li class="active"><a href="/dashboard/">Crop analysis</a></li>
+        <!-- <li><a href="#">Gallery</a></li>
+        <li><a href="#">Contact</a></li> -->
+      </ul>
+      <ul class="nav navbar-nav navbar-right">
+        <li><a href="/logout/"><span class="glyphicon glyphicon-log-in"></span> logout</a></li>
+      </ul>
+    </div>
+  </div>
+</nav>
+
+    
+    
+<div id="container">
+    <div class="card">
+            
+        <div class="card_details">
+            <form action="/process/" method="post">
+                {% csrf_token %}
+                <div>
+                <input type="text" name="nitrogen" id="input-field" placeholder="Enter Nitrogen Value"></div><br>
+                <div>
+                <input type="text" name="phosphorus" id="input-field" placeholder="Enter phosphorus Value"></div><br>
+                <div>
+                <input type="text" name="potassium" id="input-field" placeholder="Enter potassium Value"></div><br>
+                <div>
+                <input type="text" name="temperature" id="input-field" placeholder="Enter temperature Value"></div><br>
+                <div>
+                <input type="text" name="humidity" id="input-field" placeholder="Enter humidity Value"></div><br>
+                <div>
+                <input type="text" name="ph" id="input-field" placeholder="Enter ph Value"></div><br>
+                <div>
+                <input type="text" name="rainfall" id="input-field" placeholder="Enter rainfall Value"></div><br>
+
+                <button type="submit" class="btn"  onclick="">submit </button>
+                    
+            </form>
+            <!-- <a href="/logout/"><button class="btn"  >Logout </button></a> -->
+        </div>
+    </div>
+</div>
+
+</body>
+</html>
